@@ -14,78 +14,94 @@ data_path = Path('data/processed/clean_credit_record.csv')
 dados = pd.read_csv(data_path)
 
 
-############################# Streamlit ############################
+# --- Streamlit ---
+
 st.markdown('<style>div[role="listbox"] ul{background-color: #6e42ad}; </style>', unsafe_allow_html=True)
 
 st.markdown("<h1 style='text-align: center; '> Formulário para Solicitação de Cartão de Crédito </h1>", unsafe_allow_html = True)
 
-st.warning('Preencha o formulário com todos os seus dados pessoais e clique no botão **ENVIAR** no final da página.')
+st.info('Preencha o formulário com todos os seus dados pessoais e clique no botão **ENVIAR** no final da página.')
 
-# Idade
-st.write('### Idade')
-input_idade = float(st.slider('Selecione a sua idade', 18, 100))
+col1, col2 = st.columns(2)
 
-# Grau de escolaridade
-st.write('### Nível de escolaridade')
-input_grau_escolaridade = st.selectbox('Qual o Grau de Escolaridade ?', dados['Grau_escolaridade'].unique())
+with col1:
+        
+    # Idade
+    st.write('#### Idade')
+    input_idade = float(st.slider('Selecione a sua idade', 18, 100))
 
-# Estado civil
-st.write('### Estado civil')
-input_estado_civil = st.selectbox('Qual é o seu estado civil ?', dados['Estado_civil'].unique())
-
-# Número de membros da família
-st.write('### Família')
-membros_familia = float(st.slider('Selecione quantos membros tem na sua família', 1, 20))
-
-# Carro próprio
-st.write('### Carro próprio')
-input_carro_proprio = st.radio('Você possui um automóvel?',['Sim','Não'], index=0)
-input_carro_proprio_dict = {'Sim': 1, 'Não':0}
-input_carro_proprio = input_carro_proprio_dict.get(input_carro_proprio)
-
-# Casa própria
-st.write('### Casa própria')
-input_casa_propria = st.radio('Você possui uma propriedade?',['Sim','Não'], index=0)
-input_casa_propria_dict = {'Sim': 1, 'Não':0}
-input_casa_propria = input_casa_propria_dict.get(input_casa_propria)
-
-# Moradia
-st.write('### Tipo de residência')
-input_tipo_moradia = st.selectbox('Qual é o seu tipo de moradia ?', dados['Moradia'].unique())
-
-# Situação de emprego
-st.write('### Categoria de renda')
-input_categoria_renda = st.selectbox('Qual é a sua categoria de renda ?', dados['Categoria_de_renda'].unique())
-
-# Ocupação
-st.write('### Ocupação')
-input_ocupacao = st.selectbox('Qual é a sua ocupação ?', dados['Ocupacao'].unique())
+with col2:
+        
+    # Número de membros da família
+    st.write('### Família')
+    membros_familia = float(st.slider('Selecione quantos membros tem na sua família', 1, 20))
 
 # Tempo de experiência
-st.write('### Experiência')
+st.write('#### Experiência')
 input_tempo_experiencia = float(st.slider('Selecione o seu tempo de experiência em anos', 0,30))
 
-# Rendimentos
-st.write('### Rendimentos')
-input_rendimentos = float(st.text_input('Digite o seu rendimento anual (em reais) e pressione ENTER para confirmar',0))
+col3, col4 = st.columns(2)
 
-# Telefone trabalho
-st.write('### Telefone corporativo')
-input_telefone_trabalho = st.radio('Você tem um telefone corporativo?',['Sim','Não'], index=0)
-telefone_trabalho_dict = {'Sim': 1, 'Não':0}
-telefone_trabalho = telefone_trabalho_dict.get(input_telefone_trabalho)
+with col3:
+    # Situação de emprego
+    st.write('#### Categoria de renda')
+    input_categoria_renda = st.selectbox('Qual é a sua categoria de renda ?', dados['Categoria_de_renda'].unique())
 
-# Telefone fixo
-st.write('### Telefone fixo')
-input_telefone = st.radio('Você tem um telefone fixo?',['Sim','Não'], index=0)
-telefone_dict = {'Sim': 1, 'Não':0}
-telefone = telefone_dict.get(input_telefone)
+    # Moradia
+    st.write('#### Tipo de residência')
+    input_tipo_moradia = st.selectbox('Qual é o seu tipo de moradia ?', dados['Moradia'].unique())
 
-# Email 
-st.write('### Email')
-input_email = st.radio('Você tem um email?',['Sim','Não'], index=0)
-email_dict = {'Sim': 1, 'Não':0}
-email = email_dict.get(input_email)
+    # Grau de escolaridade
+    st.write('#### Nível de escolaridade')
+    input_grau_escolaridade = st.selectbox('Qual o Grau de Escolaridade ?', dados['Grau_escolaridade'].unique())
+
+with col4:
+    # Rendimentos
+    st.write('#### Rendimentos')
+    input_rendimentos = float(st.text_input('Rendimento anual (em reais)',0))
+
+    # Ocupação
+    st.write('#### Ocupação')
+    input_ocupacao = st.selectbox('Qual é a sua ocupação ?', dados['Ocupacao'].unique())
+
+    # Estado civil
+    st.write('#### Estado civil')
+    input_estado_civil = st.selectbox('Qual é o seu estado civil ?', dados['Estado_civil'].unique())
+
+col5, col6 = st.columns(2)
+
+with col5:
+    # Carro próprio
+    st.write('#### Carro próprio')
+    input_carro_proprio = st.selectbox('Você possui um automóvel?',['Sim','Não'], index=0)
+    input_carro_proprio_dict = {'Sim': 1, 'Não':0}
+    input_carro_proprio = input_carro_proprio_dict.get(input_carro_proprio)
+
+    # Telefone trabalho
+    st.write('#### Telefone corporativo')
+    input_telefone_trabalho = st.selectbox('Você tem um telefone corporativo?',['Sim','Não'], index=0)
+    telefone_trabalho_dict = {'Sim': 1, 'Não':0}
+    telefone_trabalho = telefone_trabalho_dict.get(input_telefone_trabalho)
+
+    # Email
+    st.write('#### Email')
+    input_email = st.selectbox('Você tem um email?',['Sim','Não'], index=0)
+    email_dict = {'Sim': 1, 'Não':0}
+    email = email_dict.get(input_email)
+
+
+with col6:
+    # Casa própria
+    st.write('#### Casa própria')
+    input_casa_propria = st.selectbox('Você possui uma propriedade?',['Sim','Não'], index=0)
+    input_casa_propria_dict = {'Sim': 1, 'Não':0}
+    input_casa_propria = input_casa_propria_dict.get(input_casa_propria)
+
+    # Telefone fixo
+    st.write('#### Telefone fixo')
+    input_telefone = st.selectbox('Você tem um telefone fixo?',['Sim','Não'], index=0)
+    telefone_dict = {'Sim': 1, 'Não':0}
+    telefone = telefone_dict.get(input_telefone)
 
 # Lista de todas as variáveis: 
 novo_cliente = [0, # ID_Cliente

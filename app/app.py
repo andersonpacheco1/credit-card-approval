@@ -13,7 +13,6 @@ data_path = Path('data/processed/clean_credit_record.csv')
 #carregando os dados 
 dados = pd.read_csv(data_path)
 
-
 # --- Streamlit ---
 
 st.markdown('<style>div[role="listbox"] ul{background-color: #6e42ad}; </style>', unsafe_allow_html=True)

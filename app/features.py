@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.preprocessing import OneHotEncoder, MinMaxScaler, OrdinalEncoder
+from imblearn.over_sampling import SMOTE
 
 
 # Classes para pipeline
@@ -82,3 +83,29 @@ class MinMaxWithFeatNames(BaseEstimator,TransformerMixin):
         else:
             print('Uma ou mais features não estão no DataFrame')
             return df
+        
+class OverSample(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        pass
+
+    def fit(self, df):
+        # Não há necessidade de ajustar nada para SMOTE no `fit`
+        return self
+
+    def transform(self, df):
+        # Verifica se o target 'BAD_CLIENT' está no DataFrame
+        if 'Mau' not in df.columns:
+            raise ValueError("A coluna target 'Mau' não está presente no DataFrame.")
+
+        # Divide os dados em features (X) e target (y)
+        X = df.drop(columns=['Mau'])
+        y = df['Mau']
+
+        # Aplica o SMOTE para balancear as classes
+        oversample = SMOTE(sampling_strategy='minority')
+        X_bal, y_bal = oversample.fit_resample(X, y)
+
+        # Concatena as features balanceadas com o target
+        df_bal = pd.concat([pd.DataFrame(X_bal, columns=X.columns),
+                            pd.DataFrame(y_bal, columns=['Mau'])], axis=1)
+        return df_bal

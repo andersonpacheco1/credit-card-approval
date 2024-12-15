@@ -1,5 +1,17 @@
 # Credit Card Approval Application with Machine Learning
 
+## Table of Contents
+
+- [Project Description](#project-description)
+- [Technologies Used](#technologies-used)
+- [Objective](#objective)
+- [Prerequisites](#prerequisites)
+- [How to Use](#how-to-use)
+- [Dataset](#dataset)
+- [Model Methodology](#model-methodology)
+- [License](#license)
+- [Author and Contact](#author-and-contact)
+
 ## Project Description
 
 This project involves the creation of a Streamlit application for credit approval analysis for individuals using a machine learning model. The goal is to simplify the credit approval process by allowing users to input their information and receive a predictive analysis regarding their credit approval based on a trained model.
